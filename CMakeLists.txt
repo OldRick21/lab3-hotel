@@ -14,10 +14,10 @@ FetchContent_MakeAvailable(Catch2)
 set(CMAKE_CXX_STANDARD 17)
 
 # Убедитесь, что компилятор поддерживает опции покрытия
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    add_compile_options(--coverage)
-    add_link_options(--coverage)
-endif()
+
+add_compile_options(--coverage)
+add_link_options(--coverage)
+
 
 include_directories(include)
 
