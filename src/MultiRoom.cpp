@@ -2,11 +2,11 @@
 #include <iostream>
 #include <algorithm> // Добавьте этот заголовочный файл
 
-MultiRoom::MultiRoom(bool occupied, int totalPlaces, int occupiedPlaces, const std::vector<std::pair<std::string, int>>& guests, double rate)
-    : occupied(occupied), totalPlaces(totalPlaces), occupiedPlaces(occupiedPlaces), guests(guests), rate(rate) {}
+MultiRoom::MultiRoom(int number, bool occupied, int totalPlaces, int occupiedPlaces, const std::vector<std::pair<std::string, int>>& guests, double rate)
+    : number(number), occupied(occupied), totalPlaces(totalPlaces), occupiedPlaces(occupiedPlaces), guests(guests), rate(rate) {}
 
 void MultiRoom::displayInfo() const {
-    std::cout << "Multi Room: Occupied=" << occupied << ", TotalPlaces=" << totalPlaces << ", OccupiedPlaces=" << occupiedPlaces
+    std::cout << "Multi Room: Number=" << number << ", Occupied=" << occupied << ", TotalPlaces=" << totalPlaces << ", OccupiedPlaces=" << occupiedPlaces
               << ", Rate=" << rate << std::endl;
     for (const auto& guest : guests) {
         std::cout << "Guest: RegistrationDate=" << guest.first << ", Days=" << guest.second << std::endl;

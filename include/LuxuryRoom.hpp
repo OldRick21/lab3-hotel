@@ -5,7 +5,7 @@
 
 class LuxuryRoom : public Room {
 public:
-    LuxuryRoom(bool occupied, int roomCount, int guestCount, const std::string& registrationDate, int days, double rate);
+    LuxuryRoom(int number, bool occupied, int roomCount, int guestCount, const std::string& registrationDate, int days, double rate);
     void displayInfo() const override;
     std::string getType() const override;
     bool isOccupied() const override;
@@ -17,6 +17,7 @@ public:
     void setGuestCount(int guestCount); // Добавьте этот метод
 
 private:
+    int number;
     bool occupied;
     int roomCount;
     int guestCount;

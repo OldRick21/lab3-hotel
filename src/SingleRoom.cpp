@@ -1,11 +1,11 @@
 #include "SingleRoom.hpp"
 #include <iostream>
 
-SingleRoom::SingleRoom(bool occupied, const std::string& registrationDate, int days, double rate)
-    : occupied(occupied), registrationDate(registrationDate), days(days), rate(rate) {}
+SingleRoom::SingleRoom(int number, bool occupied, const std::string& registrationDate, int days, double rate)
+    : number(number), occupied(occupied), registrationDate(registrationDate), days(days), rate(rate) {}
 
 void SingleRoom::displayInfo() const {
-    std::cout << "Single Room: Occupied=" << occupied << ", RegistrationDate=" << registrationDate << ", Days=" << days << ", Rate=" << rate << std::endl;
+    std::cout << "Single Room: Number=" << number << ", Occupied=" << occupied << ", RegistrationDate=" << registrationDate << ", Days=" << days << ", Rate=" << rate << std::endl;
 }
 
 std::string SingleRoom::getType() const {

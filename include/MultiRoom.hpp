@@ -8,7 +8,7 @@
 
 class MultiRoom : public Room {
 public:
-    MultiRoom(bool occupied, int totalPlaces, int occupiedPlaces, const std::vector<std::pair<std::string, int>>& guests, double rate);
+    MultiRoom(int number, bool occupied, int totalPlaces, int occupiedPlaces, const std::vector<std::pair<std::string, int>>& guests, double rate);
     void displayInfo() const override;
     std::string getType() const override;
     bool isOccupied() const override;
@@ -21,6 +21,7 @@ public:
     void freePart(const std::string& registrationDate);
 
 private:
+    int number;
     bool occupied;
     int totalPlaces;
     int occupiedPlaces;

@@ -5,7 +5,7 @@
 
 class SingleRoom : public Room {
 public:
-    SingleRoom(bool occupied, const std::string& registrationDate, int days, double rate);
+    SingleRoom(int number, bool occupied, const std::string& registrationDate, int days, double rate);
     void displayInfo() const override;
     std::string getType() const override;
     bool isOccupied() const override;
@@ -16,6 +16,7 @@ public:
     void freeRoom() override;
 
 private:
+    int number;
     bool occupied;
     std::string registrationDate;
     int days;

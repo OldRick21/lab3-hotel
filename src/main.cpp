@@ -90,11 +90,8 @@ void freeRoom(OrderedTable<Room*>& roomTable) {
 }
 
 void displayFreeRooms(const OrderedTable<Room*>& roomTable) {
-    std::cout << "Free rooms:" << std::endl;
     for (const auto& elem : roomTable.getTable()) {
-        if (!elem.roomDescriptor->isOccupied()) {
             elem.roomDescriptor->displayInfo();
-        }
     }
 }
 
@@ -107,9 +104,9 @@ int main() {
     OrderedTable<Room*> roomTable;
 
     // Пример добавления номеров
-    roomTable.addElement(101, new LuxuryRoom(false, 2, 0, "2023-10-01", 5, 200.0));
-    roomTable.addElement(102, new SingleRoom(false, "2023-10-02", 3, 100.0));
-    roomTable.addElement(103, new MultiRoom(false, 4, 0, {}, 50.0));
+    roomTable.addElement(101, new LuxuryRoom(101, false, 2, 0, "2023-10-01", 5, 200.0));
+    roomTable.addElement(102, new SingleRoom(102, false, "2023-10-02", 3, 100.0));
+    roomTable.addElement(103, new MultiRoom(103, false, 4, 0, {}, 50.0));
 
     std::string command;
     while (true) {

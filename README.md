@@ -1,0 +1,7 @@
+Исправить:
+OrderedTable
+OccupancyIterator
+main
+Добавить:
+calculateOccupancy
+Многопоточку в calculateOccupancy
