@@ -1,26 +1,51 @@
-#ifndef SINGLEROOM_HPP
-#define SINGLEROOM_HPP
-
+#pragma once
 #include "Room.hpp"
 
 class SingleRoom : public Room {
 public:
-    SingleRoom(int number, bool occupied, const std::string& registrationDate, int days, double rate);
+    SingleRoom(int roomNumber, bool occupied, const std::string& registrationDate, int days, double dailyRate);
     void displayInfo() const override;
     std::string getType() const override;
     bool isOccupied() const override;
     int getGuestCount() const override;
-    int getTotalPlaces() const override;
-    int getOccupiedPlaces() const override;
-    void occupyRoom() override;
-    void freeRoom() override;
+    void setName(std::string new_name);
+    const std::string &getGuestName() const;
+    void occupyRoom(const std::string &registrationDate, int days) override;
+    void vacateRoom() override;
+bool operator==(const Room& other) const override {
+        const SingleRoom* otherLuxuryRoom = dynamic_cast<const SingleRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber == otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
+
+    bool operator<(const Room& other) const override {
+        const SingleRoom* otherLuxuryRoom = dynamic_cast<const SingleRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber < otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
+
+    int getRoomNumber() const {return roomNumber;}
+
+
+    bool operator>(const Room& other) const override {
+        const SingleRoom* otherLuxuryRoom = dynamic_cast<const SingleRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber > otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
+
+
 
 private:
-    int number;
+    int roomNumber;
     bool occupied;
     std::string registrationDate;
     int days;
-    double rate;
+    std::string name;
+    double dailyRate;
 };
-
-#endif // SINGLEROOM_HPP

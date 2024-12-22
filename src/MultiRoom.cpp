@@ -1,16 +1,57 @@
 #include "MultiRoom.hpp"
-#include <iostream>
-#include <algorithm> // Добавьте этот заголовочный файл
 
-MultiRoom::MultiRoom(int number, bool occupied, int totalPlaces, int occupiedPlaces, const std::vector<std::pair<std::string, int>>& guests, double rate)
-    : number(number), occupied(occupied), totalPlaces(totalPlaces), occupiedPlaces(occupiedPlaces), guests(guests), rate(rate) {}
-
-void MultiRoom::displayInfo() const {
-    std::cout << "Multi Room: Number=" << number << ", Occupied=" << occupied << ", TotalPlaces=" << totalPlaces << ", OccupiedPlaces=" << occupiedPlaces
-              << ", Rate=" << rate << std::endl;
-    for (const auto& guest : guests) {
-        std::cout << "Guest: RegistrationDate=" << guest.first << ", Days=" << guest.second << std::endl;
+MultiRoom::MultiRoom(int roomNumber, bool isOccupied, int maxGuests, int guestCount, const std::vector<std::string>& guests, double price)
+    : roomNumber(roomNumber), occupied(isOccupied), totalSpaces(guestCount), occupiedSpaces(0), maxGuests(maxGuests), guests(guests), dailyRate(price) {
+    if (occupiedSpaces > totalSpaces) {
+        throw std::invalid_argument("Occupied spaces cannot be greater than total spaces.");
     }
+}
+
+void MultiRoom::setGuestCount(int count) {
+        occupiedSpaces = count;
+    }
+
+int MultiRoom::getMaxGuests()
+    {
+        return maxGuests;
+    }
+
+bool MultiRoom::addGuest(const std::string& guestName) {
+    if (guests.size() < maxGuests) {
+        guests.push_back(guestName);
+        setGuestCount(guests.size());
+        return true;
+    }
+    return false;
+}
+
+bool MultiRoom::removeGuest(const std::string& guestName) {
+    auto it = std::find_if(guests.begin(), guests.end(), [&guestName](const std::string& guest) {
+        return guest == guestName;
+    });
+    if (it != guests.end()) {
+        guests.erase(it);
+        setGuestCount(guests.size());
+        return true;
+    }
+    return false;
+}
+
+void MultiRoom::clearGuests() {
+    guests.clear();
+    setGuestCount(0);
+}
+
+void MultiRoom::displayInfo() const{
+    std::cout << "Multi Room " << roomNumber << ":\n";
+    std::cout << "Occupied: " << (occupied ? "Yes" : "No") << "\n";
+    std::cout << "Total Spaces: " << totalSpaces << "\n";
+    std::cout << "Occupied Spaces: " << occupiedSpaces << "\n";
+    std::cout << "Guest Info:\n";
+    for (const auto& guest : guestInfo) {
+        std::cout << "  Registration Date: " << guest.first << ", Days of Stay: " << guest.second << "\n";
+    }
+    std::cout << "Daily Rate: " << dailyRate << "\n";
 }
 
 std::string MultiRoom::getType() const {
@@ -22,35 +63,56 @@ bool MultiRoom::isOccupied() const {
 }
 
 int MultiRoom::getGuestCount() const {
-    return occupiedPlaces;
+    return occupiedSpaces;
 }
 
-int MultiRoom::getTotalPlaces() const {
-    return totalPlaces;
-}
-
-int MultiRoom::getOccupiedPlaces() const {
-    return occupiedPlaces;
-}
-
-void MultiRoom::occupyRoom() {
+void MultiRoom::occupyRoom(const std::string& registrationDate, int days) {
+    guestInfo.emplace_back(registrationDate, days);
+    occupiedSpaces++;
     occupied = true;
 }
 
-void MultiRoom::freeRoom() {
+void MultiRoom::vacateRoom() {
     occupied = false;
+    occupiedSpaces = 0;
+    guestInfo.clear();
 }
 
 void MultiRoom::occupyPart(const std::string& registrationDate, int days) {
-    if (occupiedPlaces < totalPlaces) {
-        guests.push_back({registrationDate, days});
-        occupiedPlaces++;
+    if (occupiedSpaces < totalSpaces) {
+        guestInfo.emplace_back(registrationDate, days);
+        occupiedSpaces++;
+        occupied = true;
+    } else {
+        throw std::runtime_error("No available spaces in the room.");
     }
 }
 
-void MultiRoom::freePart(const std::string& registrationDate) {
-    guests.erase(std::remove_if(guests.begin(), guests.end(), [&](const std::pair<std::string, int>& guest) {
-        return guest.first == registrationDate;
-    }), guests.end());
-    occupiedPlaces--;
+
+bool MultiRoom::isFull() const {
+        return occupiedSpaces >= maxGuests;
+    }
+
+bool MultiRoom::isEmpty() const {
+        return occupiedSpaces == 0;
+    }
+
+const std::vector<std::string>& MultiRoom::getGuests() const {
+        return guests;
+    }
+
+void MultiRoom::setName(std::string new_name){
+        name = new_name;
+    }
+
+void MultiRoom::vacatePart() {
+    if (occupiedSpaces > 0) {
+        guestInfo.pop_back();
+        occupiedSpaces--;
+        if (occupiedSpaces == 0) {
+            occupied = false;
+        }
+    } else {
+        throw std::runtime_error("No guests to vacate.");
+    }
 }

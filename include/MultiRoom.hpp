@@ -1,32 +1,73 @@
-#ifndef MULTIROOM_HPP
-#define MULTIROOM_HPP
-
+#pragma once
 #include "Room.hpp"
 #include <vector>
-#include <utility>
-#include <string>
+#include <algorithm>
 
 class MultiRoom : public Room {
-public:
-    MultiRoom(int number, bool occupied, int totalPlaces, int occupiedPlaces, const std::vector<std::pair<std::string, int>>& guests, double rate);
-    void displayInfo() const override;
-    std::string getType() const override;
-    bool isOccupied() const override;
-    int getGuestCount() const override;
-    int getTotalPlaces() const override;
-    int getOccupiedPlaces() const override;
-    void occupyRoom() override;
-    void freeRoom() override;
-    void occupyPart(const std::string& registrationDate, int days);
-    void freePart(const std::string& registrationDate);
 
 private:
-    int number;
+    int roomNumber;
     bool occupied;
-    int totalPlaces;
-    int occupiedPlaces;
-    std::vector<std::pair<std::string, int>> guests;
-    double rate;
-};
+    int totalSpaces;
+    int occupiedSpaces;
+    std::vector<std::pair<std::string, int>> guestInfo;
+    double dailyRate;
+    std::vector<std::string> guests;
+    int maxGuests;
+    std::string name;
 
-#endif // MULTIROOM_HPP
+public:
+    MultiRoom(int roomNumber, bool isOccupied, int maxGuests, int guestCount, const std::vector<std::string>& guests, double price);
+    
+    std::string getType() const override;
+    bool isOccupied() const override;
+    void displayInfo() const override;
+    int getGuestCount() const override;
+    void occupyRoom(const std::string& registrationDate, int days) override;
+    void vacateRoom() override;
+    void occupyPart(const std::string& registrationDate, int days);
+    bool isFull() const;
+    bool isEmpty() const;
+    const std::vector<std::string> &getGuests() const;
+    void setName(std::string new_name);
+    void vacatePart();
+
+    bool addGuest(const std::string& guestName);
+
+    bool removeGuest(const std::string &guestName);
+
+    void setGuestCount(int count);
+
+    int getMaxGuests();
+
+    void clearGuests();
+
+    bool operator==(const Room& other) const override {
+            const MultiRoom* otherLuxuryRoom = dynamic_cast<const MultiRoom*>(&other);
+            if (otherLuxuryRoom) {
+                return roomNumber == otherLuxuryRoom->roomNumber;
+            }
+            return false;
+        }
+
+    bool operator<(const Room& other) const override {
+        const MultiRoom* otherLuxuryRoom = dynamic_cast<const MultiRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber < otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
+
+    int getRoomNumber() const {return roomNumber;}
+
+
+    bool operator>(const Room& other) const override {
+        const MultiRoom* otherLuxuryRoom = dynamic_cast<const MultiRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber > otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
+
+
+};

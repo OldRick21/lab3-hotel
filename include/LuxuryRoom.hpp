@@ -1,29 +1,50 @@
-#ifndef LUXURYROOM_HPP
-#define LUXURYROOM_HPP
-
+#pragma once
 #include "Room.hpp"
 
 class LuxuryRoom : public Room {
 public:
-    LuxuryRoom(int number, bool occupied, int roomCount, int guestCount, const std::string& registrationDate, int days, double rate);
+    LuxuryRoom(int roomNumber, bool occupied, int numRooms, int numGuests, const std::string& registrationDate, int days, double dailyRate);
     void displayInfo() const override;
     std::string getType() const override;
     bool isOccupied() const override;
     int getGuestCount() const override;
-    int getTotalPlaces() const override;
-    int getOccupiedPlaces() const override;
-    void occupyRoom() override;
-    void freeRoom() override;
-    void setGuestCount(int guestCount); // Добавьте этот метод
+    void occupyRoom(const std::string& registrationDate, int days) override;
+    const std::string &getGuestName() const;
+    void setName(std::string new_name);
+    void vacateRoom() override;
+    bool operator==(const Room& other) const override {
+        const LuxuryRoom* otherLuxuryRoom = dynamic_cast<const LuxuryRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber == otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
+
+    int getRoomNumber() const {return roomNumber;}
+
+    bool operator<(const Room& other) const override {
+        const LuxuryRoom* otherLuxuryRoom = dynamic_cast<const LuxuryRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber < otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
+
+    bool operator>(const Room& other) const override {
+        const LuxuryRoom* otherLuxuryRoom = dynamic_cast<const LuxuryRoom*>(&other);
+        if (otherLuxuryRoom) {
+            return roomNumber > otherLuxuryRoom->roomNumber;
+        }
+        return false;
+    }
 
 private:
-    int number;
+    int roomNumber;
     bool occupied;
-    int roomCount;
-    int guestCount;
+    int numRooms;
+    int numGuests;
     std::string registrationDate;
+    std::string name;
     int days;
-    double rate;
+    double dailyRate;
 };
-
-#endif // LUXURYROOM_HPP

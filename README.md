@@ -1,7 +1,2 @@
-Исправить:
-OrderedTable
-OccupancyIterator
-main
-Добавить:
-calculateOccupancy
-Многопоточку в calculateOccupancy
+Поаправить меню, защита от дураков
+Сделать тесты

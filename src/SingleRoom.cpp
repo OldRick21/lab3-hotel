@@ -1,11 +1,14 @@
 #include "SingleRoom.hpp"
-#include <iostream>
 
-SingleRoom::SingleRoom(int number, bool occupied, const std::string& registrationDate, int days, double rate)
-    : number(number), occupied(occupied), registrationDate(registrationDate), days(days), rate(rate) {}
+SingleRoom::SingleRoom(int roomNumber, bool occupied, const std::string& registrationDate, int days, double dailyRate)
+    : roomNumber(roomNumber), occupied(occupied), registrationDate(registrationDate), days(days), dailyRate(dailyRate) {}
 
 void SingleRoom::displayInfo() const {
-    std::cout << "Single Room: Number=" << number << ", Occupied=" << occupied << ", RegistrationDate=" << registrationDate << ", Days=" << days << ", Rate=" << rate << std::endl;
+    std::cout << "Single Room " << roomNumber << ":\n";
+    std::cout << "Occupied: " << (occupied ? "Yes" : "No") << "\n";
+    std::cout << "Registration Date: " << registrationDate << "\n";
+    std::cout << "Days of Stay: " << days << "\n";
+    std::cout << "Daily Rate: " << dailyRate << "\n";
 }
 
 std::string SingleRoom::getType() const {
@@ -20,18 +23,22 @@ int SingleRoom::getGuestCount() const {
     return occupied ? 1 : 0;
 }
 
-int SingleRoom::getTotalPlaces() const {
-    return 1;
+void SingleRoom::setName(std::string new_name) {
+    name = new_name;
 }
 
-int SingleRoom::getOccupiedPlaces() const {
-    return occupied ? 1 : 0;
+const std::string& SingleRoom::getGuestName() const {
+    return name;
 }
 
-void SingleRoom::occupyRoom() {
+void SingleRoom::occupyRoom(const std::string& registrationDate, int days) {
+    this->registrationDate = registrationDate;
+    this->days = days;
     occupied = true;
 }
 
-void SingleRoom::freeRoom() {
+void SingleRoom::vacateRoom() {
     occupied = false;
+    registrationDate = "";
+    days = 0;
 }
