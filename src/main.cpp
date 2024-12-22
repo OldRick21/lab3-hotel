@@ -1,6 +1,5 @@
 #include "HotelManagement.hpp"
 
-// Отображение меню
 void showMenu() {
     std::cout << "Hotel Management System" << std::endl;
     std::cout << "1. Register Guest in Single/Luxury Room" << std::endl;
@@ -12,7 +11,7 @@ void showMenu() {
     std::cout << "7. List MultiRooms and their occupancy" << std::endl;
     std::cout << "8. List Full Rooms and Guest Names" << std::endl;
     std::cout << "9. Exit" << std::endl;
-    std::cout << "10. Hotel California" << std::endl;
+    std::cout << "10. Eagles" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
@@ -20,8 +19,8 @@ int main() {
     HotelManagement hotel1;
 
     for (int i = 1; i <= 100; i++) {
-        bool occupied1 = i <= 25;  // Первые 25 комнат заняты
-        bool occupied2 = i <= 50;  // Первые 25 комнат заняты
+        bool occupied1 = i <= 25;  
+        bool occupied2 = i <= 50;  
         hotel1.addRoom(new SingleRoom(1001 + i, occupied1, "", 0, 100.0));
         hotel1.addRoom(new LuxuryRoom(2001 + i, occupied2, 2, 4, "", 0, 200.0));
         hotel1.addRoom(new MultiRoom(3001 + i, true, 4, 1, {}, 150.0));
@@ -33,7 +32,7 @@ int main() {
 
     HotelManagement hotel;
 
-    // Добавление номеров
+    
     hotel.addRoom(new SingleRoom(101, false, "", 0, 100.0));
     hotel.addRoom(new LuxuryRoom(201, false, 2, 4, "", 0, 200.0));
     hotel.addRoom(new MultiRoom(301, false, 4, 0, {}, 150.0));
@@ -47,8 +46,8 @@ int main() {
         std::cin >> choice;
 
         if (std::cin.fail()) {
-            std::cin.clear(); // Очистка состояния ошибки
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорирование некорректного ввода
+            std::cin.clear(); 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
             std::cout << "Invalid input. Please enter a number between 1 and 10." << std::endl;
             continue;
         }

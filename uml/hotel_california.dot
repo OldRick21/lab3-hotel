@@ -1,0 +1,209 @@
+digraph HotelCalifornia {
+    node [shape=record, fontname=Arial, fontsize=10];
+
+    // Room class
+    Room [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>Room</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+virtual ~Room() = default</td></tr>
+            <tr><td>+virtual void displayInfo() const = 0</td></tr>
+            <tr><td>+virtual RoomType getType() const = 0</td></tr>
+            <tr><td>+virtual bool isOccupied() const = 0</td></tr>
+            <tr><td>+virtual int getRoomNumber() const = 0</td></tr>
+            <tr><td>+virtual int getGuestCount() const = 0</td></tr>
+            <tr><td>+virtual void occupyRoom(const std::string&amp; registrationDate, int days) = 0</td></tr>
+            <tr><td>+virtual void vacateRoom() = 0</td></tr>
+            <tr><td>+virtual void setName(std::string new_name) = 0</td></tr>
+            <tr><td>+virtual bool operator==(const Room&amp; other) const = 0</td></tr>
+            <tr><td>+virtual bool operator&lt;(const Room&amp; other) const = 0</td></tr>
+            <tr><td>+virtual bool operator&gt;(const Room&amp; other) const = 0</td></tr>
+        </table>>
+    ];
+
+    // LuxuryRoom class
+    LuxuryRoom [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>LuxuryRoom</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+LuxuryRoom(int roomNumber, bool occupied, int numRooms, int numGuests, const std::string&amp; registrationDate, int days, double dailyRate)</td></tr>
+            <tr><td>+void displayInfo() const override</td></tr>
+            <tr><td>+RoomType getType() const override</td></tr>
+            <tr><td>+bool isOccupied() const override</td></tr>
+            <tr><td>+int getGuestCount() const override</td></tr>
+            <tr><td>+void occupyRoom(const std::string&amp; registrationDate, int days) override</td></tr>
+            <tr><td>+const std::string&amp; getGuestName() const</td></tr>
+            <tr><td>+void setName(std::string new_name)</td></tr>
+            <tr><td>+void vacateRoom() override</td></tr>
+            <tr><td>+bool operator==(const Room&amp; other) const override</td></tr>
+            <tr><td>+int getRoomNumber() const</td></tr>
+            <tr><td>+bool operator&lt;(const Room&amp; other) const override</td></tr>
+            <tr><td>+bool operator&gt;(const Room&amp; other) const override</td></tr>
+            <tr><td colspan="2" bgcolor="lightgreen"><b>Private Variables</b></td></tr>
+            <tr><td>-int roomNumber</td></tr>
+            <tr><td>-bool occupied</td></tr>
+            <tr><td>-int numRooms</td></tr>
+            <tr><td>-int numGuests</td></tr>
+            <tr><td>-std::string registrationDate</td></tr>
+            <tr><td>-std::string name</td></tr>
+            <tr><td>-int days</td></tr>
+            <tr><td>-double dailyRate</td></tr>
+        </table>>
+    ];
+
+    // SingleRoom class
+    SingleRoom [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>SingleRoom</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+SingleRoom(int roomNumber, bool occupied, const std::string&amp; registrationDate, int days, double dailyRate)</td></tr>
+            <tr><td>+void displayInfo() const override</td></tr>
+            <tr><td>+RoomType getType() const override</td></tr>
+            <tr><td>+bool isOccupied() const override</td></tr>
+            <tr><td>+int getGuestCount() const override</td></tr>
+            <tr><td>+void setName(std::string new_name)</td></tr>
+            <tr><td>+const std::string&amp; getGuestName() const</td></tr>
+            <tr><td>+void occupyRoom(const std::string&amp; registrationDate, int days) override</td></tr>
+            <tr><td>+void vacateRoom() override</td></tr>
+            <tr><td>+bool operator==(const Room&amp; other) const override</td></tr>
+            <tr><td>+int getRoomNumber() const</td></tr>
+            <tr><td>+bool operator&lt;(const Room&amp; other) const override</td></tr>
+            <tr><td>+bool operator&gt;(const Room&amp; other) const override</td></tr>
+            <tr><td colspan="2" bgcolor="lightgreen"><b>Private Variables</b></td></tr>
+            <tr><td>-int roomNumber</td></tr>
+            <tr><td>-bool occupied</td></tr>
+            <tr><td>-std::string registrationDate</td></tr>
+            <tr><td>-int days</td></tr>
+            <tr><td>-std::string name</td></tr>
+            <tr><td>-double dailyRate</td></tr>
+        </table>>
+    ];
+
+    // MultiRoom class
+    MultiRoom [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>MultiRoom</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+MultiRoom(int roomNumber, bool isOccupied, int maxGuests, int guestCount, const std::vector&lt;std::string&gt;&amp; guests, double price)</td></tr>
+            <tr><td>+RoomType getType() const override</td></tr>
+            <tr><td>+bool isOccupied() const override</td></tr>
+            <tr><td>+void displayInfo() const override</td></tr>
+            <tr><td>+int getGuestCount() const override</td></tr>
+            <tr><td>+void occupyRoom(const std::string&amp; registrationDate, int days) override</td></tr>
+            <tr><td>+void vacateRoom() override</td></tr>
+            <tr><td>+void occupyPart(const std::string&amp; registrationDate, int days)</td></tr>
+            <tr><td>+bool isFull() const</td></tr>
+            <tr><td>+bool isEmpty() const</td></tr>
+            <tr><td>+const std::vector&lt;std::string&gt;&amp; getGuests() const</td></tr>
+            <tr><td>+void setName(std::string new_name)</td></tr>
+            <tr><td>+void vacatePart()</td></tr>
+            <tr><td>+bool addGuest(const std::string&amp; guestName)</td></tr>
+            <tr><td>+bool removeGuest(const std::string&amp; guestName)</td></tr>
+            <tr><td>+void setGuestCount(int count)</td></tr>
+            <tr><td>+int getMaxGuests()</td></tr>
+            <tr><td>+void clearGuests()</td></tr>
+            <tr><td>+bool operator==(const Room&amp; other) const override</td></tr>
+            <tr><td>+bool operator&lt;(const Room&amp; other) const override</td></tr>
+            <tr><td>+int getRoomNumber() const</td></tr>
+            <tr><td>+bool operator&gt;(const Room&amp; other) const override</td></tr>
+            <tr><td colspan="2" bgcolor="lightgreen"><b>Private Variables</b></td></tr>
+            <tr><td>-int roomNumber</td></tr>
+            <tr><td>-bool occupied</td></tr>
+            <tr><td>-int totalSpaces</td></tr>
+            <tr><td>-int occupiedSpaces</td></tr>
+            <tr><td>-std::vector&lt;std::pair&lt;std::string, int&gt;&gt; guestInfo</td></tr>
+            <tr><td>-double dailyRate</td></tr>
+            <tr><td>-std::vector&lt;std::string&gt; guests</td></tr>
+            <tr><td>-int maxGuests</td></tr>
+            <tr><td>-std::string name</td></tr>
+        </table>>
+    ];
+
+    // OrderedTable class
+    OrderedTable [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>OrderedTable</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+OrderedTable(size_t initial_capacity = 10)</td></tr>
+            <tr><td>+~OrderedTable()</td></tr>
+            <tr><td>+void insert(T* value)</td></tr>
+            <tr><td>+bool search(const T&amp; value) const</td></tr>
+            <tr><td>+bool remove(T* value)</td></tr>
+            <tr><td>+void print() const</td></tr>
+            <tr><td>+Iterator begin()</td></tr>
+            <tr><td>+Iterator end()</td></tr>
+            <tr><td>+const Iterator begin() const</td></tr>
+            <tr><td>+const Iterator end() const</td></tr>
+            <tr><td>+size_t getSize() const</td></tr>
+            <tr><td colspan="2" bgcolor="lightgreen"><b>Private Variables</b></td></tr>
+            <tr><td>-T data</td></tr>
+            <tr><td>-size_t capacity</td></tr>
+            <tr><td>-size_t size</td></tr>
+            <tr><td>-std::mutex mtx</td></tr>
+        </table>>
+    ];
+
+    // Iterator class
+    Iterator [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>Iterator</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+Iterator(pointer ptr)</td></tr>
+            <tr><td>+reference operator() const</td></tr>
+            <tr><td>+pointer operator-&gt;()</td></tr>
+            <tr><td>+Iterator&amp; operator++()</td></tr>
+            <tr><td>+Iterator operator++(int)</td></tr>
+            <tr><td>+Iterator&amp; operator--()</td></tr>
+            <tr><td>+Iterator operator--(int)</td></tr>
+            <tr><td>+friend bool operator==(const Iterator&amp; a, const Iterator&amp; b)</td></tr>
+            <tr><td>+friend bool operator!=(const Iterator&amp; a, const Iterator&amp; b)</td></tr>
+            <tr><td colspan="2" bgcolor="lightgreen"><b>Private Variables</b></td></tr>
+            <tr><td>-pointer current</td></tr>
+        </table>>
+    ];
+
+    // HotelOccupancy class
+    HotelOccupancy [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>HotelOccupancy</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+HotelOccupancy(const OrderedTable&lt;Room&gt;&amp; rooms)</td></tr>
+            <tr><td>+double calculateOccupancy() const</td></tr>
+            <tr><td colspan="2" bgcolor="lightgreen"><b>Private Variables</b></td></tr>
+            <tr><td>-const OrderedTable&lt;Room&gt;&amp; rooms</td></tr>
+            <tr><td>-mutable std::mutex mtx</td></tr>
+        </table>>
+    ];
+
+    // HotelManagement class
+    HotelManagement [
+        label=<<table border="0" cellborder="1" cellspacing="0">
+            <tr><td colspan="2"><b>HotelManagement</b></td></tr>
+            <tr><td colspan="2" bgcolor="lightblue"><b>Public Methods</b></td></tr>
+            <tr><td>+HotelManagement()</td></tr>
+            <tr><td>+void addRoom(Room* room)</td></tr>
+            <tr><td>+void registerGuest(const std::string&amp; guestName, int roomNumber, const std::string&amp; registrationDate, int days)</td></tr>
+            <tr><td>+void registerGuest(const std::string&amp; guestName, int roomNumber)</td></tr>
+            <tr><td>+void removeGuest(const std::string&amp; guestName, int roomNumber)</td></tr>
+            <tr><td>+void checkoutGuest(int roomNumber)</td></tr>
+            <tr><td>+void listAvailableRooms() const</td></tr>
+            <tr><td>+void listMultiRooms() const</td></tr>
+            <tr><td>+void listFullRooms() const</td></tr>
+            <tr><td>+double calculateOccupancy() const</td></tr>
+            <tr><td>+const OrderedTable&lt;Room&gt;&amp; getRooms() const</td></tr>
+            <tr><td>+OrderedTable&lt;Room&gt;::Iterator getRoomsBegin() const</td></tr>
+            <tr><td>+OrderedTable&lt;Room&gt;::Iterator getRoomsEnd() const</td></tr>
+            <tr><td colspan="2" bgcolor="lightgreen"><b>Private Variables</b></td></tr>
+            <tr><td>-OrderedTable&lt;Room&gt; rooms</td></tr>
+            <tr><td>-std::unordered_map&lt;RoomType, std::string&gt; roomTypeMap</td></tr>
+        </table>>
+    ];
+
+    // Relationships
+    LuxuryRoom -> Room [label="inherits", style=dashed];
+    SingleRoom -> Room [label="inherits", style=dashed];
+    MultiRoom -> Room [label="inherits", style=dashed];
+    OrderedTable -> Iterator [label="uses", style=dashed];
+    HotelOccupancy -> OrderedTable [label="uses", style=dashed];
+    HotelManagement -> OrderedTable [label="uses", style=dashed];
+}
