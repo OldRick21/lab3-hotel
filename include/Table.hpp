@@ -46,8 +46,13 @@ public:
         ++size;
     }
 
+    // bool search(const T& value) const {
+    //     return std::binary_search(data, data + size, value, [](const T* a, const T* b) { return *a < *b; });
+    // }
+
     bool search(const T& value) const {
-        return std::binary_search(data, data + size, value, [](const T* a, const T* b) { return *a < *b; });
+        T temp = value;
+        return std::binary_search(data, data + size, &temp, [](const T* a, const T* b) { return *a < *b; });
     }
 
     bool remove(T* value) {

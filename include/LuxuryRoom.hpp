@@ -5,7 +5,7 @@ class LuxuryRoom : public Room {
 public:
     LuxuryRoom(int roomNumber, bool occupied, int numRooms, int numGuests, const std::string& registrationDate, int days, double dailyRate);
     void displayInfo() const override;
-    std::string getType() const override;
+    RoomType getType() const override;
     bool isOccupied() const override;
     int getGuestCount() const override;
     void occupyRoom(const std::string& registrationDate, int days) override;

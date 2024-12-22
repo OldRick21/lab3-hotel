@@ -11,8 +11,8 @@ void SingleRoom::displayInfo() const {
     std::cout << "Daily Rate: " << dailyRate << "\n";
 }
 
-std::string SingleRoom::getType() const {
-    return "Single";
+RoomType SingleRoom::getType() const {
+    return static_cast<RoomType>(1);
 }
 
 bool SingleRoom::isOccupied() const {

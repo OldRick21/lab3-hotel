@@ -18,8 +18,8 @@ private:
 
 public:
     MultiRoom(int roomNumber, bool isOccupied, int maxGuests, int guestCount, const std::vector<std::string>& guests, double price);
-    
-    std::string getType() const override;
+
+    RoomType getType() const override;
     bool isOccupied() const override;
     void displayInfo() const override;
     int getGuestCount() const override;

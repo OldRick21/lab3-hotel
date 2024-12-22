@@ -20,8 +20,8 @@ void LuxuryRoom::displayInfo() const {
     std::cout << "Daily Rate: " << dailyRate << "\n";
 }
 
-std::string LuxuryRoom::getType() const {
-    return "Luxury";
+RoomType LuxuryRoom::getType() const {
+    return static_cast<RoomType>(0);
 }
 
 bool LuxuryRoom::isOccupied() const {

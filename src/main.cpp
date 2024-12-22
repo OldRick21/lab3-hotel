@@ -17,6 +17,20 @@ void showMenu() {
 }
 
 int main() {
+    HotelManagement hotel1;
+
+    for (int i = 1; i <= 100; i++) {
+        bool occupied1 = i <= 25;  // Первые 25 комнат заняты
+        bool occupied2 = i <= 50;  // Первые 25 комнат заняты
+        hotel1.addRoom(new SingleRoom(1001 + i, occupied1, "", 0, 100.0));
+        hotel1.addRoom(new LuxuryRoom(2001 + i, occupied2, 2, 4, "", 0, 200.0));
+        hotel1.addRoom(new MultiRoom(3001 + i, true, 4, 1, {}, 150.0));
+    }
+//
+//    std::cout << (25 + 50 + 100)/(100.0 + 100.0 + 400.0) << std::endl;
+//
+//    std::cout << hotel1.calculateOccupancy();
+
     HotelManagement hotel;
 
     // Добавление номеров
@@ -32,6 +46,13 @@ int main() {
         showMenu();
         std::cin >> choice;
 
+        if (std::cin.fail()) {
+            std::cin.clear(); // Очистка состояния ошибки
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорирование некорректного ввода
+            std::cout << "Invalid input. Please enter a number between 1 and 10." << std::endl;
+            continue;
+        }
+
         switch (choice) {
             case 1:
                 std::cout << "Enter guest name: ";
@@ -44,11 +65,23 @@ int main() {
                 std::getline(std::cin, registrationDate);
                 std::cout << "Enter number of days: ";
                 std::cin >> days;
+                if (std::cin.fail()) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input for number of days. Please enter a valid number." << std::endl;
+                    break;
+                }
                 hotel.registerGuest(guestName, roomNumber, registrationDate, days);
                 break;
             case 2:
                 std::cout << "Enter room number: ";
                 std::cin >> roomNumber;
+                if (std::cin.fail()) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input for room number. Please enter a valid number." << std::endl;
+                    break;
+                }
                 hotel.checkoutGuest(roomNumber);
                 break;
             case 3:
@@ -63,6 +96,12 @@ int main() {
                 std::getline(std::cin, guestName);
                 std::cout << "Enter room number: ";
                 std::cin >> roomNumber;
+                if (std::cin.fail()) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input for room number. Please enter a valid number." << std::endl;
+                    break;
+                }
                 hotel.registerGuest(guestName, roomNumber);
                 break;
             case 6:
@@ -71,6 +110,12 @@ int main() {
                 std::getline(std::cin, guestName);
                 std::cout << "Enter room number: ";
                 std::cin >> roomNumber;
+                if (std::cin.fail()) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input for room number. Please enter a valid number." << std::endl;
+                    break;
+                }
                 hotel.removeGuest(guestName, roomNumber);
                 break;
             case 7:
@@ -83,14 +128,12 @@ int main() {
                 std::cout << "Exiting..." << std::endl;
                 return 0;
             case 10:
-                std::cout << "-----------------------------------------" << std::endl;
                 std::cout << "Welcome to the Hotel California" << std::endl;
                 std::cout << "Such a lovely place (Such a lovely place)" << std::endl;
                 std::cout << "Such a lovely face" << std::endl;
                 std::cout << "Plenty of room at the Hotel California" << std::endl;
                 std::cout << "Any time of year (Any time of year)" << std::endl;
                 std::cout << "You can find it here" << std::endl;
-                std::cout << "-----------------------------------------" << std::endl;
                 break;
             default:
                 std::cout << "Invalid choice. Please try again." << std::endl;

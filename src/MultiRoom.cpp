@@ -1,7 +1,7 @@
 #include "MultiRoom.hpp"
 
 MultiRoom::MultiRoom(int roomNumber, bool isOccupied, int maxGuests, int guestCount, const std::vector<std::string>& guests, double price)
-    : roomNumber(roomNumber), occupied(isOccupied), totalSpaces(guestCount), occupiedSpaces(0), maxGuests(maxGuests), guests(guests), dailyRate(price) {
+    : roomNumber(roomNumber), occupied(isOccupied), totalSpaces(maxGuests), occupiedSpaces(guestCount), maxGuests(maxGuests), guests(guests), dailyRate(price) {
     if (occupiedSpaces > totalSpaces) {
         throw std::invalid_argument("Occupied spaces cannot be greater than total spaces.");
     }
@@ -54,8 +54,8 @@ void MultiRoom::displayInfo() const{
     std::cout << "Daily Rate: " << dailyRate << "\n";
 }
 
-std::string MultiRoom::getType() const {
-    return "Multi";
+RoomType MultiRoom::getType() const {
+    return static_cast<RoomType>(2);
 }
 
 bool MultiRoom::isOccupied() const {
@@ -116,3 +116,4 @@ void MultiRoom::vacatePart() {
         throw std::runtime_error("No guests to vacate.");
     }
 }
+
