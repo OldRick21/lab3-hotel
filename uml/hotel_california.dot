@@ -205,5 +205,8 @@ digraph HotelCalifornia {
     MultiRoom -> Room [label="inherits", style=dashed];
     OrderedTable -> Iterator [label="uses", style=dashed];
     HotelOccupancy -> OrderedTable [label="uses", style=dashed];
+    HotelManagement -> LuxuryRoom [label="uses", style=dashed];
+    HotelManagement -> SingleRoom [label="uses", style=dashed];
     HotelManagement -> OrderedTable [label="uses", style=dashed];
+    HotelManagement -> MultiRoom [label="uses", style=dashed];
 }
